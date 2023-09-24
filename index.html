@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://www.ikanbot.com/resources/logo.svg" id="favicon">
-	<script>
-    var favicon = document.getElementById('favicon');
-    setInterval(function() {
-        favicon.href = (favicon.href === 'https://www.ikanbot.com/resources/logo.svg') ? 'https://p1.xywm.ltd/2023/09/23/88df34e916c046b4178f91f5295aa158.png' : 'https://www.ikanbot.com/resources/logo.svg';
-    }, 3000); // 每秒更换一次图标
-</script>
     <title>iKanBot X ZLX WEB</title>
     <style>
         body {
@@ -29,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* 将镶嵌容器放置在最底层 */
+            z-index: -1;
         }
         
         iframe {
@@ -53,17 +47,23 @@
             top: 0;
             left: 0;
             z-index: 1;
-            height: 30px; /* 设置固定高度 */
+            height: 30px;
+            transition: background-color 1s ease;
+        }
+
+        .site-info-container.hide-background {
+            background-color: rgba(255, 255, 255, 0);
         }
         
         .site-info {
             display: inline-block;
-            animation: marquee 30s linear infinite;
+            animation: marquee 45s linear infinite;
+			text-shadow: 0 0 1.5px #999999;
         }
         
         @keyframes marquee {
-            0% { transform: translateX(200%); }
-            100% { transform: translateX(-200%); }
+            0% { transform: translateX(180%); }
+            100% { transform: translateX(-180%); }
         }
     </style>
 </head>
@@ -75,5 +75,19 @@
     <div class="embedded-website">
         <iframe src="https://www.ikanbot.com/" allowfullscreen></iframe>
     </div>
+    
+    <script>
+        var favicon = document.getElementById('favicon');
+        setInterval(function() {
+            favicon.href = (favicon.href === 'https://www.ikanbot.com/resources/logo.svg') ? 'https://p1.xywm.ltd/2023/09/23/88df34e916c046b4178f91f5295aa158.png' : 'https://www.ikanbot.com/resources/logo.svg';
+        }, 3000);
+
+        setInterval(function() {
+            siteInfoContainer.classList.add('hide-background');
+            setTimeout(function() {
+                siteInfoContainer.classList.remove('hide-background');
+            }, 1000);
+        }, 30000);
+    </script>
 </body>
 </html>
