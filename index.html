@@ -65,6 +65,85 @@
             0% { transform: translateX(180%); }
             100% { transform: translateX(-180%); }
         }
+  /* 新增样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: normal;
+            color: #333;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .modal-content input[type="text"] {
+            margin-top: 20px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #666;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .modal-content input[type="text"]:focus {
+            border-color: #337AB7;
+        }
+
+        .modal-content button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #337AB7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: #1E5092;
+        }
+
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-overlay.show input[type="text"] {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +153,16 @@
     
     <div class="embedded-website">
         <iframe src="https://www.ikanbot.com/" allowfullscreen></iframe>
+    </div>
+    
+       <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <h2>请输入授权码</h2>
+			<p style="font-size: 14px"><br>Z网络提醒：为了防止DOS攻击，授权码获取请联系👇<br></p>
+			<p style="font-size: 12px">-添加WX：zhanglianxin233获取-</p>
+            <input type="text" id="authCodeInput">
+            <button onclick="checkAuthCode()">✅提交</button>
+        </div>
     </div>
     
     <script>
@@ -88,6 +177,24 @@
                 siteInfoContainer.classList.remove('hide-background');
             }, 1000);
         }, 30000);
+
+        var modalOverlay = document.getElementById('modalOverlay');
+        var authCodeInput = document.getElementById('authCodeInput');
+
+        function checkAuthCode() {
+            var inputAuthCode = authCodeInput.value.trim();
+            var correctAuthCode = "Z网络X爱看机器人"; // 设置正确的授权码
+
+            if (inputAuthCode === correctAuthCode) {
+                modalOverlay.classList.remove('show');
+                authCodeInput.value = '';
+            } else {
+                alert("授权码错误，请重新输入！");
+            }
+        }
+
+        window.addEventListener('load', function() {
+            modalOverlay.classList.add('show');
+            authCodeInput.focus();
+        });
     </script>
-</body>
-</html>
