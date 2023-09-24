@@ -186,15 +186,22 @@
             var correctAuthCode = "Z网络X爱看机器人"; // 设置正确的授权码
 
             if (inputAuthCode === correctAuthCode) {
-                modalOverlay.classList.remove('show');
-                authCodeInput.value = '';
-            } else {
-                alert("授权码错误，请重新输入！");
-            }
-        }
+      localStorage.setItem('authCode', correctAuthCode); // 将授权码保存到LocalStorage
+      modalOverlay.classList.remove('show');
+      authCodeInput.value = '';
+   } else {
+      alert("授权码错误，请重新输入！");
+   }
+}
 
-        window.addEventListener('load', function() {
-            modalOverlay.classList.add('show');
-            authCodeInput.focus();
-        });
+window.addEventListener('load', function() {
+   var savedAuthCode = localStorage.getItem('authCode'); // 检查是否有保存的授权码
+   if (savedAuthCode && savedAuthCode === "Z网络X爱看机器人") {
+      // 如果保存的授权码存在且正确，则不显示授权框
+      modalOverlay.style.display = 'none';
+   } else {
+      modalOverlay.classList.add('show');
+      authCodeInput.focus();
+   }
+});
     </script>
